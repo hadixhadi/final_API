@@ -8,11 +8,9 @@ class ImageInline(admin.StackedInline):
     model = Image
 
 
-class DataLine(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
-
-
-admin.site.register(Post, DataLine)
+admin.site.register(Post,PostAdmin)
 

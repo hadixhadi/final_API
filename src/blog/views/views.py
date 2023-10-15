@@ -3,15 +3,9 @@ from rest_framework import generics , viewsets
 from blog.models import Post
 from blog.serializers.front import DataSerializer
 from rest_framework.permissions import IsAdminUser , IsAuthenticatedOrReadOnly
-
+from blog.permissions.permissions import IsAuthorOrReadOnly
 class BlogViewSets(viewsets.ModelViewSet):
-
-    def get_permissions(self):
-        if self.action == 'retrieve':
-            permission_classes=[IsAdminUser]
-        else:
-            permission_classes=[IsAuthenticatedOrReadOnly]
-        return [permission() for permission in permission_classes]
+    permission_classes = [IsAuthorOrReadOnly]
     def get_queryset(self):
         return Post.objects.all()
 

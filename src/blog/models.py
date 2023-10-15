@@ -1,14 +1,29 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 # Create your models here.
 
 class Post(models.Model):
-    name = models.CharField(max_length=250, null=True, blank=True, verbose_name='نام و نام خانوداگی')
-    id_code = models.BigIntegerField(primary_key=True, verbose_name='کد شناسایی')
-    father_name = models.CharField(max_length=250, verbose_name='نام پدر')
-    history = models.TextField(null=True, blank=True, verbose_name='خاطرات')
-    life_history = models.TextField(null=True, blank=True, verbose_name='زندگی نامه')
-    devise = models.TextField(null=True, blank=True, verbose_name='وصیت نامه')
+    author=models.ForeignKey(get_user_model(),on_delete=models.CASCADE,
+                             verbose_name="نویسنده")
+
+    name = models.CharField(max_length=250, null=True, blank=True,
+                            verbose_name='نام و نام خانوداگی')
+
+    id_code = models.BigIntegerField(primary_key=True,
+                                     verbose_name='کد شناسایی')
+
+    father_name = models.CharField(max_length=250,
+                                   verbose_name='نام پدر')
+
+    history = models.TextField(null=True, blank=True,
+                               verbose_name='خاطرات')
+
+    life_history = models.TextField(null=True, blank=True,
+                                    verbose_name='زندگی نامه')
+
+    devise = models.TextField(null=True, blank=True,
+                              verbose_name='وصیت نامه')
 
     def __str__(self):
         return f"{self.id_code} -- {self.name}"
