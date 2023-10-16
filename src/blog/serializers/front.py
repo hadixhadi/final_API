@@ -7,14 +7,24 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ('image_url',)
     def get_image_url(self, obj):
-        domain = 'http://192.168.100.10:8000'  # Replace with your actual domain address
+        domain = 'http://192.168.100.15:8000'  # Replace with your actual domain address
         if obj.image:
             return f"{domain}{obj.image.url}"
         return None
 
 class DataSerializer(serializers.ModelSerializer):
-    image = ImageSerializer(many=True, read_only=True)
+    image_url = ImageSerializer(many=True, read_only=True)
+    image=serializers.ImageField()
     class Meta:
         model = Post
-        fields = ['name', 'id_code', 'father_name', 'history', 'life_history', 'devise', 'image']
+        fields = ['name', 'id_code', 'father_name', 'history',
+                  'life_history', 'devise','author', 'image','image_url']
 
+
+
+class CreatePostSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
+    class Meta:
+        model = Post
+        fields = ['name', 'id_code', 'father_name', 'history',
+                  'life_history', 'devise', 'author', 'image']
