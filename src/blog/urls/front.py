@@ -6,7 +6,7 @@ router.register('',BlogViewSets,basename='blog-list')
 urlpatterns=[
     # path("",PostsList.as_view(), name="post_list"),
     # path("<int:pk>",PostDetails.as_view(), name="post_details")
-    path("blog/",BlogViewSets.as_view({'get':'list'}),name='BlogApi-List'),
-    path("blog/<int:pk>", BlogViewSets.as_view({'get': 'retrieve'}), name='BlogApi-Retrieve')
+    # path("blog/",BlogViewSets.as_view({'get':'list'}),name='BlogApi-List'),
+    # path("blog/<int:pk>", BlogViewSets.as_view({'get': 'retrieve'}), name='BlogApi-Retrieve')
 
 ]+router.urls
